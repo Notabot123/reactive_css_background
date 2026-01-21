@@ -1,21 +1,36 @@
-// Simple demo sentiment function
-// Replace this with your backend call when ready
-function updateSentiment() {
-    // Generate a random sentiment between -1 and +1
-    const sentiment = Math.random() * 2 - 1;
+// Update sentiment and ripple on each keystroke
+document.getElementById("textInput").addEventListener("input", () => {
+    updateSentiment();
+    rippleFromInput();
+});
 
-    // Choose red for negative, green for positive
+// Simple demo sentiment generator
+function updateSentiment() {
+    const sentiment = Math.random() * 2 - 1;
     const color = sentiment > 0 ? "#00ff7b" : "#ff3333";
 
-    // Update the CSS variable controlling the gradient
     document.documentElement.style.setProperty('--sentiment-color', color);
+}
 
-    // Restart ripple animation
-    document.body.classList.remove('ripple');
+// Create a ripple at the input field's center
+function rippleFromInput() {
+    const input = document.getElementById("textInput");
+    const rect = input.getBoundingClientRect();
 
-    // Force reflow so animation can restart
-    void document.body.offsetWidth;
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
 
-    // Add ripple class to trigger animation
-    document.body.classList.add('ripple');
+    spawnRipple(x, y);
+}
+
+// Create and animate a ripple element
+function spawnRipple(x, y) {
+    const ripple = document.createElement("div");
+    ripple.className = "ripple-spot";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+
+    document.body.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 1000);
 }
