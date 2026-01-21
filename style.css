@@ -19,26 +19,46 @@ body {
 /* Ripple element */
 .ripple-spot {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, var(--sentiment-color) 0%, transparent 70%);
+    width: 40px; /* larger starting size */
+    height: 40px;
+    background: radial-gradient(
+        circle,
+        var(--sentiment-color) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        transparent 70%
+    );
     border-radius: 50%;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.2);
-    opacity: 0.5;
-    animation: rippleOut 1s ease-out forwards;
+
+    /* Soft glow */
+    box-shadow: 0 0 25px var(--sentiment-color);
+
+    /* Start small and subtle */
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.35;
+
+    animation: rippleFlow 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes rippleOut {
+@keyframes rippleFlow {
     0% {
-        transform: translate(-50%, -50%) scale(0.2);
-        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0.35;
+        box-shadow: 0 0 25px var(--sentiment-color);
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(6);
+        opacity: 0.15;
+        box-shadow: 0 0 40px var(--sentiment-color);
     }
     100% {
-        transform: translate(-50%, -50%) scale(6);
+        transform: translate(-50%, -50%) scale(10);
         opacity: 0;
+        box-shadow: 0 0 10px var(--sentiment-color);
     }
 }
+
+
 
 /* textbox styling */
 .ui-layer {
