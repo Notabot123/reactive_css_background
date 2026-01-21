@@ -40,19 +40,30 @@ body {
     }
 }
 
-/* UI layer above background */
+/* textbox styling */
 .ui-layer {
     position: relative;
     z-index: 10;
-    padding: 20px;
+
+    /* Center the input horizontally */
+    display: flex;
+    justify-content: center;
+
+    /* Optional: center vertically too */
+    align-items: center;
+    height: 100vh;
 }
 
-/* Input styling */
+/* Larger, more elegant input */
 input {
     backdrop-filter: blur(6px);
     background: rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    border-radius: 8px;
+    padding: 16px 22px;       /* bigger padding */
+    border-radius: 10px;
     border: none;
-    font-size: 1rem;
+    font-size: 1.2rem;        /* larger text */
+    width: 320px;             /* wider input */
+    max-width: 80%;           /* responsive */
+    text-align: center;       /* optional: centered text */
 }
+
