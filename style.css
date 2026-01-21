@@ -1,0 +1,65 @@
+:root {
+    --sentiment-color: #ffffff;
+}
+
+/* Base gradient background */
+body {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+
+    background:
+        linear-gradient(to bottom left, #ff3333ff 0%, #0000ff00 70%),
+        linear-gradient(to bottom right, #00ff7bff 0%, #0000ff00 70%),
+        linear-gradient(to top left, #0000ffff 0%, #0000ff00 70%),
+        linear-gradient(to top, var(--sentiment-color) 0%, var(--sentiment-color) 100%);
+}
+
+/* Ripple layer (inactive by default) */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--sentiment-color) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+}
+
+/* Triggered ripple animation */
+body.ripple::before {
+    animation: ripple 1.8s ease-out forwards;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.6);
+    }
+    70% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+/* UI elements above the animation */
+.ui-layer {
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+}
+
+/* Input styling */
+input {
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+}
